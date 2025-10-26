@@ -11,7 +11,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from perturb_gym.predict import predict_from_config_file, predict_from_trained_model
 from perturb_gym.configs.access import list_config_file_ids, load_training_configs
+__all__ = [
+    "load_training_configs",
+    "list_config_file_ids",
+    "predict_from_config_file",
+    "predict_from_trained_model",
+]
 
 __all__ = [
     "load_training_configs",
