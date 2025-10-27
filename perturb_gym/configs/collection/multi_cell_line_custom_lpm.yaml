@@ -8,10 +8,10 @@ environment_configs:
   - seed: 17
 
 data_configs:
-  - training_contexts: [Replogle, arc_challenge_train]
+  - training_contexts: [Replogle, HumanCellLine_CRISPRi_ARCChallenge_Train]
     val_and_test_perturbations_selected_from: HumanCellLine_K562_10xChromium3-scRNA-seq_Replogle22
     data_storage_type: in_memory
-  - training_contexts: [Replogle, arc_challenge_train]
+  - training_contexts: [Replogle, HumanCellLine_CRISPRi_ARCChallenge_Train]
     val_and_test_perturbations_selected_from: HumanCellLine_RPE1_10xChromium3-scRNA-seq_Replogle22
     data_storage_type: in_memory
 

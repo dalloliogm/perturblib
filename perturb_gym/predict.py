@@ -26,6 +26,7 @@ import torch
 import perturb_lib as plib
 from perturb_gym.configs.access import load_training_configs
 from perturb_gym.configs.base import DataConfig, EnvironmentConfig, ModelConfig, TrainingConfig
+from perturb_gym.utils import hash_training_config_excluding_seed
 
 
 def predict_from_trained_model(
@@ -146,7 +147,7 @@ def predict_from_config_file(
     # Construct model path
     unique_model_name = (
         f"{target_config.model_config.model_id}_"
-        f"{plib.training.hash_training_config_excluding_seed(target_config)}"
+        f"{hash_training_config_excluding_seed(target_config)}"
     )
     model_dir = results_dir / config_file_id_or_path / unique_model_name / f"seed_{model_seed}"
     model_path = model_dir / "model.pt"
@@ -200,6 +201,7 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
 
     predict_from_config_file(
         config_file_id_or_path=args.config_file,

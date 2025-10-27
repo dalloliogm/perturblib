@@ -35,8 +35,19 @@ def _get_arc_challenge_train_dataset():
     # Standardize the format if needed
     if "gene" in adata.obs.columns:
         adata.obs = adata.obs.rename(columns={"gene": "perturbation_target"})
+    if "target_gene" in adata.obs.columns:
+        adata.obs = adata.obs.rename(columns={"target_gene": "perturbation_target"})
+
+    # For var columns, if there's no gene_name, use the index as readout_target
     if "gene_name" in adata.var.columns:
         adata.var = adata.var.rename(columns={"gene_name": "readout_target"})
+    elif "readout_target" not in adata.var.columns:
+        # Use the index as readout_target if no gene_name column exists
+        adata.var["readout_target"] = adata.var.index.astype(str)
+
+    # Print available columns for debugging
+    print(f"Available obs columns: {list(adata.obs.columns)}")
+    print(f"Available var columns: {list(adata.var.columns)}")
 
     # Ensure required columns exist
     if "perturbation_target" not in adata.obs.columns:
@@ -75,8 +86,19 @@ def _get_arc_challenge_val_dataset():
     # Standardize the format if needed
     if "gene" in adata.obs.columns:
         adata.obs = adata.obs.rename(columns={"gene": "perturbation_target"})
+    if "target_gene" in adata.obs.columns:
+        adata.obs = adata.obs.rename(columns={"target_gene": "perturbation_target"})
+
+    # For var columns, if there's no gene_name, use the index as readout_target
     if "gene_name" in adata.var.columns:
         adata.var = adata.var.rename(columns={"gene_name": "readout_target"})
+    elif "readout_target" not in adata.var.columns:
+        # Use the index as readout_target if no gene_name column exists
+        adata.var["readout_target"] = adata.var.index.astype(str)
+
+    # Print available columns for debugging
+    print(f"Available obs columns: {list(adata.obs.columns)}")
+    print(f"Available var columns: {list(adata.var.columns)}")
 
     # Ensure required columns exist
     if "perturbation_target" not in adata.obs.columns:
